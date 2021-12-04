@@ -10,35 +10,12 @@ public class Day3 : Days
     {
         var gamma = string.Empty;
         var epsilon = string.Empty;
-        var bits = new char[Input.Length, MaxLength];
-
-        for (var i = 0; i < Input.Length; i++)
-        {
-            var bit = Input[i];
-
-            for (var j = 0; j < MaxLength; j++)
-            {
-                bits[i, j] = bit[j];
-            }
-        }
+        var bits = Input.ToList();
 
         for (var i = 0; i < MaxLength; i++)
         {
-            var zeroes = 0;
-            var ones = 0;
-
-            for (var j = 0; j < Input.Length; j++)
-            {
-                var value = bits[j, i];
-                if (value.Equals('0'))
-                {
-                    zeroes++;
-                }
-                else
-                {
-                    ones++;
-                }
-            }
+            var zeroes = bits.Count(s => s[i].Equals('0'));
+            var ones = bits.Count(s => s[i].Equals('1'));
 
             if (ones > zeroes)
             {
