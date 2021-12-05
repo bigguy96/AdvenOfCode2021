@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode2021;
+﻿namespace AdventOfCode2021.Day4;
 
 public class Day4 : Days
 {
@@ -49,15 +49,4 @@ public class Day4 : Days
 
         return 0;
     }
-}
-
-public class Board
-{
-    public string Name { get; set; }
-    public IEnumerable<Rows> Rows { get; set; }
-}
-
-public class Rows
-{
-    public IEnumerable<int> Numbers { get; set; }
 }
