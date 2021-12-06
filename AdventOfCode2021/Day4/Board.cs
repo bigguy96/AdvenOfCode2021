@@ -3,5 +3,5 @@
 public class Board
 {
     public string Name { get; set; }
-    public IEnumerable<Rows> Rows { get; set; }
+    public List<int> Numbers { get; set; }
 }
