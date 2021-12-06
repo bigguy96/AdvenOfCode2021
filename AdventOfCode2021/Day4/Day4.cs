@@ -54,18 +54,17 @@ public class Day4 : Days
             {
                 var num = groupedBoards[i].Select(board => board.Numbers).ToList();
 
-                for (var index = 0; index < 5; index++)
+                for (var j = 0; j < 5; j++)
                 {
-                    var totalRows = num[index][0] + num[index][1] + num[index][2] + num[index][3] + num[index][4];
-                    var totalColumns = num[0][index] + num[1][index] + num[2][index] + num[3][index] + num[4][index];
+                    var totalRows = num[j][0] + num[j][1] + num[j][2] + num[j][3] + num[j][4];
+                    var totalColumns = num[0][j] + num[1][j] + num[2][j] + num[3][j] + num[4][j];
 
-                    if (totalRows == -5 || totalColumns == -5)
-                    {
-                        winner = true;
-                        winningNumber = number;
-                        boardName = groupedBoards[i].Key;
-                        break;
-                    }
+                    if (totalRows != -5 && totalColumns != -5) continue;
+                    
+                    winner = true;
+                    winningNumber = number;
+                    boardName = groupedBoards[i].Key;
+                    break;
                 }
             }
 
