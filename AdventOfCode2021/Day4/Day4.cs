@@ -28,7 +28,6 @@ public class Day4 : Days
 
         //create grouping of bingo boards by their names.
         var groupedBoards = boards.GroupBy(board => board.Name).ToList();
-
         var winner = false;
         var boardName = string.Empty;
         var winningNumber = 0;
