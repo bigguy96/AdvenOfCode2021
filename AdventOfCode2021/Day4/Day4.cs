@@ -12,6 +12,7 @@ public class Day4 : Days
         var boards = new List<Board>();
         var currentIndex = 1;
 
+        //create bingo boards from input.
         foreach (var number in boardNumbers)
         {
             var board = new Board
@@ -25,14 +26,17 @@ public class Day4 : Days
             if (boards.Count % 5 == 0) currentIndex++;
         }
 
+        //create grouping of bingo boards by their names.
         var groupedBoards = boards.GroupBy(board => board.Name).ToList();
 
         var winner = false;
         var boardName = string.Empty;
         var winningNumber = 0;
 
+        //loop through bingo numbers.
         foreach (var number in numbers)
         {
+            //check if number is exits on bingo board, and set it as -1 (marked);
             for (var i = 0; i < groupedBoards.Count; i++)
             {
                 var num = groupedBoards[i].Select(board => board.Numbers).ToList();
@@ -50,6 +54,7 @@ public class Day4 : Days
                 }
             }
 
+            //check if there's a bingo.
             for (var i = 0; i < groupedBoards.Count; i++)
             {
                 var num = groupedBoards[i].Select(board => board.Numbers).ToList();
@@ -71,6 +76,7 @@ public class Day4 : Days
             if (winner) break;
         }
 
+        //get board total number.
         var boardTotal = groupedBoards
             .Where(grouping => grouping.Key.Equals(boardName))
             .Select(grouping => new { Total = grouping.SelectMany(board => board.Numbers).Where(number => number != -1).Sum() })
