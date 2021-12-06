@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace AdventOfCode2021.Day4;
+﻿namespace AdventOfCode2021.Day4;
 
 public class Day4 : Days
 {
@@ -30,17 +28,18 @@ public class Day4 : Days
         var groupedBoards = boards.GroupBy(board => board.Name).ToList();
 
         var winner = false;
+        var boardName = string.Empty;
+        var winningNumber = 0;
         foreach (var number in numbers)
         {
             for (var i = 0; i < groupedBoards.Count; i++)
             {
-                Console.WriteLine($"\n\n{groupedBoards[i].Key}");
+                boardName = groupedBoards[i].Key;
                 var num = groupedBoards[i].Select(board => board.Numbers).ToList();
                 var total = 0;
 
                 for (var j = 0; j < num.Count; j++)
                 {
-                    Console.WriteLine("");
                     for (var k = 0; k < 5; k++)
                     {
                         if (num[j][k] == number)
@@ -50,67 +49,26 @@ public class Day4 : Days
 
                         total += num[j][k];
 
-                        if (total == -5)
-                        {
-                            winner = true;
-                            Console.WriteLine("WINNER!!!");
-                            break;
-                        }
-
-                        Console.Write($"{num[j][k]} ");
+                        if (total != -5) continue;
+                        winner = true;
+                        break;
                     }
                 }
             }
 
-            if (winner)
-            {
-                break;
-            }
+            if (!winner) continue;
+            winningNumber = number;
+            break;
         }
 
-        //foreach (var group in groupedBoards)
-        //{
-        //    Console.WriteLine("\n");
-        //    Console.WriteLine(group.Key);
+        var boardTotal = groupedBoards
+                             .Where(grouping => grouping.Key.Equals(boardName))
+                             .Select(grouping => new { Total = grouping.SelectMany(board => board.Numbers).Where(number => number != -1).Sum() })
+                             .Single().Total;
 
-        //    foreach (var board in group)
-        //    {
-        //        Console.WriteLine(string.Join(" ", board.Numbers));
-        //    }
-        //}
+        var finalScore = winningNumber * boardTotal;
+        Console.WriteLine($"\n\nWinning {boardName} with the last number drawn was: {winningNumber} with the board final score of : {finalScore}\n\n");
 
-        //var winner = false;
-        //var message = string.Empty;
-        //var winningBoard = new Board();
-        //foreach (var number in numbers)
-        //{
-        //    foreach (var board in groupedBoards.SelectMany(groupedBoard => groupedBoard))
-        //    {
-        //        for (var i = 0; i < board.Numbers.Count; i++)
-        //        {
-        //            if (board.Numbers[i] == number)
-        //            {
-        //                board.Numbers[i] = -1;
-        //            }
-        //        }
-
-        //        if (board.Numbers.Sum() != -5) continue;
-        //        winner = true;
-        //        winningBoard = board;
-        //        message = $"Board {board.Name} won!";
-        //        break;
-        //    }
-
-        //    foreach (var board in groupedBoards.SelectMany(groupedBoard => groupedBoard))
-        //    {
-        //        var r = board;
-        //    }
-
-        //    if (!winner) continue;
-        //    Console.WriteLine($"{message} with number: {number}");
-        //    break;
-        //}
-
-        return 0;
+        return finalScore;
     }
 }
