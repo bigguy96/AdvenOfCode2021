@@ -13,5 +13,6 @@ Console.WriteLine($"Day 3 - Part 1: {Day3.PartOne()}");
 Console.WriteLine($"Day 3 - Part 2: {Day3.PartTwo()}");
 
 Console.WriteLine($"Day 4 - Part 1: {Day4.PartOne()}");
+Console.WriteLine($"Day 4 - Part 2: {Day4.PartTwo()}");
 
 Console.ReadLine();
