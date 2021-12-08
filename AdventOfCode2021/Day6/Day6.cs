@@ -7,12 +7,13 @@ public class Day6 : Days
 
     public static string PartOne()
     {
+        const int days = 80;
         var fishes = Input[0]
             .Split(',', StringSplitOptions.RemoveEmptyEntries)
             .Select(number => Convert.ToInt32(number))
             .ToList();
 
-        for (var i = 0; i < 18; i++)
+        for (var i = 0; i < days; i++)
         {
             var count = fishes.Count;
             for (var j = 0; j < count; j++)
