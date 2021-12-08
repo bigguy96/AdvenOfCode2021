@@ -18,7 +18,7 @@ public class Day6 : Days
             var count = fishes.Count;
             for (var j = 0; j < count; j++)
             {
-                if (fishes[j]== 0)
+                if (fishes[j] == 0)
                 {
                     fishes[j] = 6;
                     fishes.Add(8);
@@ -35,8 +35,31 @@ public class Day6 : Days
 
     public static string PartTwo()
     {
+        const int days = 256;
+        var array = new long[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        var fishes = Input[0]
+            .Split(',', StringSplitOptions.RemoveEmptyEntries)
+            .Select(int.Parse)
+            .ToList();
 
+        foreach (var fish in fishes)
+        {
+            array[fish]++;
+        }
 
-        return "";
+        for (var i = 80; i < days; ++i)
+        {
+            var cycle = array[0];
+
+            for (var j = 1; j < 9; ++j)
+            {
+                array[j - 1] = array[j];
+            }
+
+            array[8] = cycle;
+            array[6] += cycle;
+        }
+
+        return array.Sum().ToString();
     }
 }
