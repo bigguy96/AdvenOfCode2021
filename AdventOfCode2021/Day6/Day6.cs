@@ -36,30 +36,30 @@ public class Day6 : Days
     public static string PartTwo()
     {
         const int days = 256;
-        var array = new long[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        var fishes = Input[0]
+        var numbers = new long[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        var ages = Input[0]
             .Split(',', StringSplitOptions.RemoveEmptyEntries)
             .Select(int.Parse)
             .ToList();
 
-        foreach (var fish in fishes)
+        foreach (var age in ages)
         {
-            array[fish]++;
+            numbers[age]++;
         }
 
-        for (var i = 80; i < days; ++i)
+        for (var i = 0; i < days; ++i)
         {
-            var cycle = array[0];
+            var number = numbers[0];
 
             for (var j = 1; j < 9; ++j)
             {
-                array[j - 1] = array[j];
+                numbers[j - 1] = numbers[j];
             }
 
-            array[8] = cycle;
-            array[6] += cycle;
+            numbers[8] = number;
+            numbers[6] += number;
         }
 
-        return array.Sum().ToString();
+        return numbers.Sum().ToString();
     }
 }
